@@ -3,6 +3,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser')
 const cors = require('cors');
+const mongoose=require('mongoose')
 require('dotenv').config();
 
 
@@ -20,5 +21,8 @@ const storeroute = require('./routes/stores');
 
 app.use('/api/v1/stores', storeroute)
 
-
-app.listen(port, () => console.log(`server running in ${process.env.NODE_ENV} mode on port ${port}`))
+mongoose.connect('mongodb+srv://bcae208924402018:Surya%402001@cluster0.ieth7oj.mongodb.net/storeLocator?retryWrites=true&w=majority')
+    .then(result => {
+        app.listen(port, () => console.log(`server running in ${process.env.NODE_ENV} mode on port ${port}`))
+    })
+    .catch(err => console.log(err));
